@@ -5,7 +5,7 @@ const api ={
 } 
 
 ///weather?q=${city},${country}&appid=${key}
-function App() {
+function Meteo() {
 //recupere info dans l'api donner 
 const[temp, setTemp]=useState('');// de base est vide 
 const [meteo,setMeteo]= useState({});
@@ -35,23 +35,17 @@ const chercher = evt =>{
 
     return `${day} ${date} ${month} ${year}`
   }
+
+  
   return (
-<div className={(typeof meteo.main !="undefined")? ((meteo.main.temp>16 )?'app chaud':'app froid'):'app'}>
+<div className="app ">
 <main>
-  <h1>Météo</h1>
-    <div className="barre-recherche">
-      <input type="text"
-        className="search"
-        placeholder="Chercher"
-        onChange={e=>setTemp(e.target.value)}
-        value={temp}
-        onKeyPress={chercher} />
-      
-    </div>
+  <h1>{meteo.name}, {meteo.sys.country}</h1>
+
     {(typeof meteo.main != "undefined") ? (
     <div>
       <div className="container">
-       <div className="location"> <a></a>{meteo.name}, {meteo.sys.country}</div>
+       
        <div className="date">{date(new Date())}</div>
 
     </div>
@@ -67,4 +61,4 @@ const chercher = evt =>{
   );
 }
 
-export default App;
+export default Meteo;
