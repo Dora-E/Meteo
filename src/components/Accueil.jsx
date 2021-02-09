@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+  Link
+} from "react-router-dom";
+
 const api ={
  key: "98b7465353d383f3d0f3bc4a284a48ae",
  base : "http://api.openweathermap.org/data/2.5/"
 } 
 
 ///weather?q=${city},${country}&appid=${key}
-function Meteo() {
+function Accueil() {
+  const history = useHistory();
 //recupere info dans l'api donner 
 const[temp, setTemp]=useState('');// de base est vide 
 const [meteo,setMeteo]= useState({});
@@ -22,6 +31,10 @@ const chercher = evt =>{
   }
 }
 
+const temperature=(e)=>{
+  history.push("/Meteo/" + meteo.main.temp)// redirige vers la page méteo en envoyant la variable que j'ai recupere de lapi dans le state meteo 
+}
+
 
 // recupere la date du jour en créant un tableau contenant les valeur a afficher le moi et le jour 
   const date = (d)=>{
@@ -35,17 +48,23 @@ const chercher = evt =>{
 
     return `${day} ${date} ${month} ${year}`
   }
-
-  
   return (
-<div className="app ">
+<div className="app">
 <main>
-  <h1>{meteo.name}, {meteo.sys.country}</h1>
-
+  <h1>Météo</h1>
+    <div className="barre-recherche">
+      <input type="text"
+        className="search"
+        placeholder="Chercher"
+        onChange={e=>setTemp(e.target.value)}
+        value={temp}
+        onKeyPress={chercher} />
+      
+    </div>
     {(typeof meteo.main != "undefined") ? (
     <div>
       <div className="container">
-       
+       <div className="location" onClick={temperature}> {meteo.name}, {meteo.sys.country}</div>
        <div className="date">{date(new Date())}</div>
 
     </div>
@@ -61,4 +80,4 @@ const chercher = evt =>{
   );
 }
 
-export default Meteo;
+export default Accueil;
