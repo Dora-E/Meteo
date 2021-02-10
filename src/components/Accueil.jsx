@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   useHistory,
-  Link
 } from "react-router-dom";
-
+// definition de l'api pour la recup
 const api ={
  key: "98b7465353d383f3d0f3bc4a284a48ae",
  base : "http://api.openweathermap.org/data/2.5/"
@@ -55,7 +52,8 @@ const temperature=(e)=>{
     <div className="barre-recherche">
       <input type="text"
         className="search"
-        placeholder="Chercher"
+        placeholder="Chercher..."
+        //prend la valeur qui est inserer dans le input et lance la fonction chercher definie au dessus afin d'afficher le resultat
         onChange={e=>setTemp(e.target.value)}
         value={temp}
         onKeyPress={chercher} />
