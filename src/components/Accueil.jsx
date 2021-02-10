@@ -13,17 +13,18 @@ const api ={
 function Accueil() {
   const history = useHistory();
 //recupere info dans l'api donner 
-const[temp, setTemp]=useState('');// de base est vide 
+const[temp, setTemp]=useState('');//useState est vide de base 
 const [meteo,setMeteo]= useState({});
 
 const chercher = evt =>{
   if(evt.key ==="Enter"){
+    //  recup l'api afin de pouvoir la parcourir temp est ce que l'on chercher 
     fetch(`${api.base}weather?q=${temp}&units=metric&APPID=${api.key}`)
     .then(res=>res.json())
     .then(result=>{
-      setMeteo(result);
-      setTemp('')
-      console.log(result)
+      setMeteo(result);// retourne une reponse de la recherche 
+      setTemp('') // reviens a l'etat de base cad vide 
+      
     })
   }
 }
@@ -33,7 +34,7 @@ const temperature=(e)=>{
 }
 
 
-// recupere la date du jour en créant un tableau contenant les valeur a afficher le moi et le jour 
+// recupere la date du jour en créant un tableau contenant les valeurs a afficher le mois et le jour 
   const date = (d)=>{
     let months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"];
     let days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
