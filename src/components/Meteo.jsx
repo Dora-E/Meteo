@@ -6,7 +6,7 @@ export default function Meteo() {
         <div className="container">
              
           <div className={params.temperature>16 ?'app chaud':'app froid'}>
-           {params.temperature > 16? 'Il fait chaud ':'Il fait froid'}
+           {params.temperature >= 15? 'Il fait chaud ':'Il fait froid'}
         </div>   
         </div>
        
